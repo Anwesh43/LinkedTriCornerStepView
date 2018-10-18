@@ -20,7 +20,7 @@ fun Canvas.drawTCSNode(i : Int, scale : Float, paint : Paint) {
     val h : Float = height.toFloat()
     val gap : Float = w / (nodes + 1)
     val r : Float = gap / 3
-    val ballR : Float = gap / 12
+    val ballR : Float = gap / 8
     val sk : Float = 1f / corners
     paint.style = Paint.Style.STROKE
     paint.strokeWidth = Math.min(w, h) / 60
