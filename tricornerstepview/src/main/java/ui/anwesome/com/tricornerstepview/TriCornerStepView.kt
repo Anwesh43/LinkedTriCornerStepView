@@ -10,10 +10,34 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.Color
-import android.graphics.RectF
 
 val nodes : Int = 5
 val corners : Int = 3
+
+fun Canvas.drawTCSNode(i : Int, scale : Float, paint : Paint) {
+    val w : Float = width.toFloat()
+    val h : Float = height.toFloat()
+    val gap : Float = w / (nodes + 1)
+    val r : Float = gap / 3
+    val ballR : Float = gap / 12
+    val sk : Float = 1f / corners
+    paint.style = Paint.Style.STROKE
+    paint.strokeWidth = Math.min(w, h) / 60
+    paint.color = Color.parseColor("#673AB7")
+    val deg : Double = (2 * Math.PI) / corners
+    save()
+    translate(gap + i * gap, h/2)
+    for (j in 0..corners - 1) {
+        val sc : Float = Math.min(sk, Math.max(0f, scale - sk * j)) * corners
+        val x : Float = r * sc * Math.cos(j * deg).toFloat()
+        val y: Float = r * sc * Math.sin(j * deg).toFloat()
+        save()
+        translate(x, y)
+        drawCircle(0f, 0f, ballR, paint)
+        restore()
+    }
+    restore()
+}
 
 class TriCornerStepView(ctx : Context) : View(ctx) {
 
