@@ -4,6 +4,7 @@ package ui.anwesome.com.tricornerstepview
  * Created by anweshmishra on 18/10/18.
  */
 
+import android.app.Activity
 import android.view.View
 import android.view.MotionEvent
 import android.content.Context
@@ -192,6 +193,14 @@ class TriCornerStepView(ctx : Context) : View(ctx) {
             tcs.startUpdating {
                 animator.start()
             }
+        }
+    }
+
+    companion object {
+        fun create(activity : Activity) : TriCornerStepView {
+            val view : TriCornerStepView = TriCornerStepView(activity)
+            activity.setContentView(view)
+            return view
         }
     }
 }
