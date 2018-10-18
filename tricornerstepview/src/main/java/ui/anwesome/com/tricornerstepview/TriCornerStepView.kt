@@ -169,4 +169,27 @@ class TriCornerStepView(ctx : Context) : View(ctx) {
             curr.startUpdating(cb)
         }
     }
+
+    data class Renderer(var view : TriCornerStepView) {
+
+        private val tcs : TriCornerStep = TriCornerStep(0)
+
+        private var animator : Animator = Animator(view)
+
+        fun render(canvas : Canvas, paint : Paint) {
+            canvas.drawColor(Color.parseColor("#BDBDBD"))
+            tcs.draw(canvas, paint)
+            animator.animate {
+                tcs.update {i, scl ->
+                    animator.stop()
+                }
+            }
+        }
+
+        fun handleTap() {
+            tcs.startUpdating {
+                animator.start()
+            }
+        }
+    }
 }
